@@ -1,10 +1,10 @@
 {% extends 'base_mobileui.html' %}
 
-{% block title %}fail{% endblock %}
+{% block title %}失败{% endblock %}
 
 {% block neck %}
-<a class="button normal" href="javascript:;" onclick="window.history.back();">Go back</a>
-<a class="button warning" target="_blank" href="http://{{ SCRAPYD_SERVERS[node-1] }}">Scrapyd server</a>
+<a class="button normal" href="javascript:;" onclick="window.history.back();">返回</a>
+<a class="button warning" target="_blank" href="http://{{ SCRAPYD_SERVERS[node-1] }}">Scrapyd 服务</a>
 {% endblock %}
 
 {% block body %}
@@ -14,7 +14,7 @@
   {% endif %}
 
   {% if status_code %}
-  <h3>status_code: {{ status_code }}</h3>
+  <h3>状态码: {{ status_code }}</h3>
   {% endif %}
 
   <pre>

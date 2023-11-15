@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}multinode results{% endblock %}
+{% block title %}多节点结果{% endblock %}
 
 {% block head %}
   <link rel="stylesheet" type="text/css" href="{{ static_css_multinode }}">
@@ -18,25 +18,25 @@
       <tr>
         <th>
           <input type="checkbox" id="checkAll" />
-          <a class="state warning" href="javascript:;" onclick="invertSelection();">invert selection</a>
+          <a class="state warning" href="javascript:;" onclick="invertSelection();">取消全选</a>
         </th>
-        <th>Index</th>
+        <th>序号</th>
 
         {% if opt == 'stop' %}
-        <th>Jobs</th>
+        <th>任务</th>
         {% else %}
-        <th>Projects</th>
+        <th>项目</th>
         {% endif %}
 
-        <th>Node name</th>
-        <th>Status</th>
-        <th>Project</th>
+        <th>服务节点</th>
+        <th>状态</th>
+        <th>子项目</th>
 
         {% if opt == 'stop' %}
-        <th>Job</th>
-        <th>Prev state</th>
+        <th>任务</th>
+        <th>上一次状态</th>
         {% elif opt == 'delversion' %}
-        <th>Version</th>
+        <th>版本</th>
         {% endif %}
       </tr>
     </thead>
@@ -111,7 +111,7 @@ function fireXHR(){
 
 
 function execXHR(idx, url){
-  my$('#'+'status_'+idx).innerHTML = '<em class="normal">loading...</em>';
+  my$('#'+'status_'+idx).innerHTML = '<em class="normal">加载中...</em>';
   var req = new XMLHttpRequest();
   req.onreadystatechange = function() {
     if (this.readyState == 4) {

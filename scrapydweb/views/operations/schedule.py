@@ -627,7 +627,7 @@ class ScheduleTaskView(BaseView):
     def dispatch_request(self, **kwargs):
         task = Task.query.get(self.task_id)
         if not task:
-            message = "Task #%s not found" % self.task_id
+            message = "找不到 #%s 任务" % self.task_id
             self.logger.error(message)
             js = dict(url=self.url, auth=self.AUTH, status_code=-1, status=self.ERROR, message=message)
         else:

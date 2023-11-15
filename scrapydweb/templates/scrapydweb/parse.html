@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}log parser{% endblock %}
+{% block title %}日志解析{% endblock %}
 
 {% block head %}
   <style>
@@ -21,21 +21,21 @@
 
 
 {% block body %}
-<h2>Upload a scrapy logfile to parse.</h2>
+<h2>上传 scrapy 日志文件进行解析</h2>
 <div class="wrap">
   <form method="post" enctype="multipart/form-data">
     <div class="upload">
       <label class="button warning">
         <input id="file" type="file" name="file" accept=".log, .txt" />
-        Select
+        上传
       </label>
 
-      <span class="filename">a log or txt file</span>
+      <span class="filename">log 或 txt 文件</span>
 
       <a href="javascript:;" class="submit" onclick="uploadLogfile();">
         <i class="iconfont icon-upload"></i>
       </a>
-      <a id="demo" class="link" href="{{ url_parse_demo }}">demo</a>
+{#      <a id="demo" class="link" href="{{ url_parse_demo }}">demo</a>#}
     </div>
   </form>
 <div>
@@ -44,7 +44,7 @@
 <script>
 my$('#file').onchange = function () {
   //my$('.filename').innerText = this.value;
-  my$('.filename').innerText = "a log or txt file";
+  my$('.filename').innerText = "log 或 txt 文件";
 
   var logfile = my$('#file').files[0];
   if (logfile === undefined) {

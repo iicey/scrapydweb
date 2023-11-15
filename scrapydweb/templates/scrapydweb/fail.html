@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}fail{% endblock %}
+{% block title %}失败{% endblock %}
 
 {% block head %}
   <style>
@@ -15,7 +15,7 @@
 
 
 {% block body %}
-<h2>Oops! Something went wrong.</h2>
+<h2>哎呀，出问题了！</h2>
 
 <div class="wrap">
   {% if url %}
@@ -27,7 +27,7 @@
   {% endif %}
 
   {% if status_code %}
-  <h3>status_code: {{ status_code }}</h3>
+  <h3>状态码: {{ status_code }}</h3>
   {% endif %}
 
   <pre>{{ text }}</pre>
@@ -38,12 +38,12 @@
   </div>
 
   {% if message %}
-  <h3>Details</h3>
+  <h3>详情</h3>
   <pre>{{ message }}</pre>
   {% endif %}
 
   {% if jump_url %}
-  <h4>Redirecting to <a class="link" href="{{ jump_url }}">{{ jump_url }}</a> in 3 seconds...</h4>
+  <h4>将重定向 <a class="link" href="{{ jump_url }}">{{ jump_url }}</a> 在3秒内...</h4>
   {% endif %}
 
   {% if url %}

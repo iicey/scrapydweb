@@ -1,6 +1,6 @@
 {% extends 'base_mobileui.html' %}
 
-{% block title %}log{% endblock %}
+{% block title %}日志{% endblock %}
 
 {% block head %}
   <link rel="stylesheet" type="text/css" href="{{ static_css_utf8_mobileui }}">
@@ -32,13 +32,13 @@
 
 
 <div id="log" class="wrap" style="padding: 1px 12px;">
-<h3>PROJECT ({{ project }})<br>SPIDER ({{ spider }})</h3>
+<h3>项目 ({{ project }})<br>爬虫 ({{ spider }})</h3>
 <pre>{{ text }}</pre>
 
-<h3>PROJECT ({{ project }})<br>SPIDER ({{ spider }})</h3>
+<h3>项目 ({{ project }})<br>爬虫 ({{ spider }})</h3>
 {% if url_refresh %}
 <a id="refresh_button" class="button danger" href="javascript:;" onclick="forceLoader('{{ url_refresh }}');">
-Press to refresh
+刷新
 </a>
 <br>
 <br>
@@ -74,7 +74,7 @@ const LAST_UPDATE_TIMESTAMP = {{ last_update_timestamp }};
 setInterval(function() {
   var now_timestamp = Date.now() / 1000;
   var seconds = Math.ceil(now_timestamp - LAST_UPDATE_TIMESTAMP);
-  my$('#refresh_button').innerHTML = "Loaded <span style='color: black;'>" + seconds + "</span> secs ago, press to reload (SLOW)";
+  my$('#refresh_button').innerHTML = "加载 <span style='color: black;'>" + seconds + "</span> 秒后,  点击重新加载 (慢)";
 }, 1000);
 {% endif %}
 </script>

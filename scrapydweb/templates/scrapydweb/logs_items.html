@@ -11,7 +11,7 @@
 {% block body %}
 <h2>
   <a class="link" target="_blank" href="{{ url }}">
-  Directory listing for /{{ title }}/{% if project %}{{ project }}/{% endif %}{% if spider %}{{ spider }}/{% endif %}
+  目录列表 /{{ title }}/{% if project %}{{ project }}/{% endif %}{% if spider %}{{ spider }}/{% endif %}
   </a>
 </h2>
 
@@ -19,8 +19,8 @@
 <template>
   <el-col :span="5">
     <el-button-group>
-      <el-button type="primary" onclick="window.history.back();" icon="el-icon-arrow-left" size="medium">Back</el-button>
-      <el-button type="primary" onclick="window.history.forward();" size="medium">Forward<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+      <el-button type="primary" onclick="window.history.back();" icon="el-icon-arrow-left" size="medium">返回</el-button>
+      <el-button type="primary" onclick="window.history.forward();" size="medium">前进<i class="el-icon-arrow-right el-icon--right"></i></el-button>
     </el-button-group>
   </el-col>
 
@@ -29,7 +29,7 @@
     {% if SCRAPYD_SERVERS_AMOUNT > 1 %}
     <el-button type="success" onclick="window.location='{{ url_multinode_run }}';" size="small">{{ g.multinode|safe }}</el-button>
     {% endif %}
-    <el-button type="success" onclick="window.location='{{ url_schedule }}';" size="medium">Run Spider ({{ spider }})</el-button>
+    <el-button type="success" onclick="window.location='{{ url_schedule }}';" size="medium">启动爬虫 ({{ spider }})</el-button>
   </el-button-group>
 {% endif %}
 
@@ -37,21 +37,21 @@
     ref="multipleTable"
     :data="tableData"
     tooltip-effect="dark"
-    empty-text="There is nothing to display."
+    empty-text="没有内容可以显示"
     :max-height="maxHeight"
     style="width: 100%;"
     :size="size"
     :default-sort="{prop: 'content_type', order: 'ascending'}"
   >
 
-    <el-table-column prop="index" label="Index" sortable width="70" align="center"></el-table-column>
+    <el-table-column prop="index" label="序号" sortable width="70" align="center"></el-table-column>
     <!-- stats.json.bak [application/x-trash] -->
-    <el-table-column prop="content_type" label="Content type" sortable width="135" align="center"></el-table-column>
-    <el-table-column prop="content_encoding" label="Encoding" sortable width="95" align="center"></el-table-column>
-    <el-table-column prop="size" label="Size" sortable width="100" align="center" :sort-method="sortSize" :sort-orders=['descending','ascending',null]></el-table-column>
+    <el-table-column prop="content_type" label="文本类型" sortable width="135" align="center"></el-table-column>
+    <el-table-column prop="content_encoding" label="编码" sortable width="95" align="center"></el-table-column>
+    <el-table-column prop="size" label="大小" sortable width="100" align="center" :sort-method="sortSize" :sort-orders=['descending','ascending',null]></el-table-column>
 
     {% if project and spider %}
-    <el-table-column prop="stats" label="Stats" sortable width="{% if SCRAPYD_SERVERS_AMOUNT > 1 %}105{% else %}65{% endif %}" align="center">
+    <el-table-column prop="stats" label="统计" sortable width="{% if SCRAPYD_SERVERS_AMOUNT > 1 %}105{% else %}65{% endif %}" align="center">
       <template slot-scope="scope">
         {% if SCRAPYD_SERVERS_AMOUNT > 1 %}
         <a class="state multinode" :href="scope.row.url_clusterreports" target="_blank">{{ g.multinode|safe }}</a>
@@ -59,12 +59,12 @@
         <a :class="scope.row.stats_class" :href="scope.row.url_stats" target="_blank">Stats</a>
       </template>
     </el-table-column>
-    <el-table-column prop="log" label="Log" sortable width="60" align="center">
+    <el-table-column prop="log" label="日志" sortable width="60" align="center">
       <template slot-scope="scope"><a class="state normal" :style="{ display: scope.row.display }" :href="scope.row.url_utf8" target="_blank">{{scope.row.log}}</a></template>
     </el-table-column>
     {% endif %}
 
-    <el-table-column prop="filename" label="Filename" sortable min-width="90" align="left" show-overflow-tooltip>
+    <el-table-column prop="filename" label="文件名" sortable min-width="90" align="left" show-overflow-tooltip>
       <template slot-scope="scope"><a class="link" :href="scope.row.href" :target="scope.row.target">{{scope.row.filename}}</a></template>
     </el-table-column>
 

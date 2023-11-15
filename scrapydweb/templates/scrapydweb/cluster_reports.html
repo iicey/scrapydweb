@@ -10,7 +10,7 @@
 {% block body %}
 <h2>
   {% if selected_nodes %}<a class="link" target="_blank" href="{{ url_report }}">{% endif %}
-  {{ selected_nodes|length }} Reports of /{{ project }}/{{ spider }}/{{ job }}/
+  {{ selected_nodes|length }} 统计 /{{ project }}/{{ spider }}/{{ job }}/
   {% if selected_nodes %}</a>{% endif %}
 </h2>
 
@@ -20,9 +20,9 @@
 <template>
   <el-button-group>
     {% if url_servers %}
-    <el-button type="primary" onclick="showLoader(); window.location='{{ url_servers }}';" icon="el-icon-circle-check-outline" size="medium">Select nodes</el-button>
+    <el-button type="primary" onclick="showLoader(); window.location='{{ url_servers }}';" icon="el-icon-circle-check-outline" size="medium">选择服务器</el-button>
     {% endif %}
-    <el-button type="success" onclick="showLoader(); window.location='{{ url_jobs }}';" icon="el-icon-tickets" size="medium">Select a job</el-button>
+    <el-button type="success" onclick="showLoader(); window.location='{{ url_jobs }}';" icon="el-icon-tickets" size="medium">选择项目</el-button>
   </el-button-group>
 
   <el-table
@@ -30,7 +30,7 @@
     :data="tableData"
     style="width: 100%;"
     tooltip-effect="dark"
-    empty-text="There is nothing to display."
+    empty-text="没有内容可以显示"
     :max-height="maxHeight"
     highlight-current-row
 
@@ -43,18 +43,18 @@
     :default-sort="{prop: 'node', order: 'ascending'}"
   >
 
-    <el-table-column prop="node" label="Node" fixed sortable align="center" width="70"></el-table-column>
-    <el-table-column prop="stats" label="Stats" fixed sortable :sort-method="sortStatus" align="center" width="100">
+    <el-table-column prop="node" label="序号" fixed sortable align="center" width="70"></el-table-column>
+    <el-table-column prop="stats" label="统计" fixed sortable :sort-method="sortStatus" align="center" width="100">
       <template slot-scope="scope">
         <a target="_blank" :class="scope.row.stats_class" v-bind:style="{display: scope.row.stats_display}" :href="scope.row.stats_url">
           {{scope.row.stats}}
         </a>
-        <em class="normal"  v-bind:style="{display: scope.row.stats_loading_display}">loading...</em>
+        <em class="normal"  v-bind:style="{display: scope.row.stats_loading_display}">加载中...</em>
       </template>
     </el-table-column>
-    <el-table-column prop="first_log_time" label="first_log_time" sortable align="center" width="145"></el-table-column>
-    <el-table-column prop="runtime" label="Runtime" sortable :sort-method="sortRuntime" :sort-orders="sortOrders" align="center" width="125"></el-table-column>
-    <el-table-column prop="latest_log_time" label="latest_log_time" sortable align="center" width="145"></el-table-column>
+    <el-table-column prop="first_log_time" label="第一次运行时间" sortable align="center" width="145"></el-table-column>
+    <el-table-column prop="runtime" label="执行时间" sortable :sort-method="sortRuntime" :sort-orders="sortOrders" align="center" width="125"></el-table-column>
+    <el-table-column prop="latest_log_time" label="最后一次运行时间" sortable align="center" width="145"></el-table-column>
 
 {% include 'scrapydweb/include_reports_template_table.html' %}
 

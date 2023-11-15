@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}stats{% endblock %}
+{% block title %}统计{% endblock %}
 
 {% block head %}
   <link rel="stylesheet" type="text/css" href="{{ static_css_stats }}">
@@ -35,19 +35,19 @@ window.onload = function(){
 
 
 {% block body %}
-<h3>PROJECT ({{ project }}), SPIDER ({{ spider }})</h3>
+<h3>项目 ({{ project }}), 统计 ({{ spider }})</h3>
 
 {% if url_refresh %}
 <div style="padding: 5px 0;">
   {% if not url_jump %}
-    <a id="refresh_button" class="button danger" href="{{ url_refresh }}" onclick="showLoader();">Click to refresh</a>
+    <a id="refresh_button" class="button danger" href="{{ url_refresh }}" onclick="showLoader();">点击刷新</a>
   {% else %}
     {% if 'realtime=True' in url_jump %}
-    <a id="refresh_button" class="button safe" href="{{ url_refresh }}" onclick="showLoader();">Click to refresh</a>
-    <a class="button danger" href="{{ url_jump }}" onclick="showLoader();">Realtime version</a>
+    <a id="refresh_button" class="button safe" href="{{ url_refresh }}" onclick="showLoader();">点击刷新</a>
+    <a class="button danger" href="{{ url_jump }}" onclick="showLoader();">当前版本</a>
     {% else %}
-    <a class="button safe" href="{{ url_jump }}" onclick="showLoader();">Cached version</a>
-    <a id="refresh_button" class="button danger" href="{{ url_refresh }}" onclick="showLoader();">Click to refresh</a>
+    <a class="button safe" href="{{ url_jump }}" onclick="showLoader();">缓存版本</a>
+    <a id="refresh_button" class="button danger" href="{{ url_refresh }}" onclick="showLoader();">点击刷新</a>
     {% endif %}
   {% endif %}
 </div>
@@ -55,31 +55,31 @@ window.onload = function(){
 
 <div class="tab-wrap wrap">
   <ul class="tab tab-header clear-float">
-    <li id="header_analysis">Log analysis</li>
-    <li id="header_categories">Log categorization</li>
+    <li id="header_analysis">日志分析</li>
+    <li id="header_categories">日志分类</li>
     {% if datas|length > 1 %}
-    <li id="header_charts">Progress visualization</li>
+    <li id="header_charts">可视化进度</li>
     {% endif %}
-    <li id="header_logs">View log</li>
+    <li id="header_logs">查看日志</li>
     {% if crawler_stats %}
-    <li id="header_stats">Crawler.stats</li>
+    <li id="header_stats">爬虫状态</li>
     {% endif %}
     {% if crawler_engine %}
-    <li id="header_engine">Crawler.engine</li>
+    <li id="header_engine">爬虫引擎</li>
     {% endif %}
   </ul>
   <ul class="tab tab-content">
     <li id="content_analysis">
       <div class="table vertical-table">
         <table>
-          <tr><th>project</th><td>{{ project }}</td></tr>
-          <tr><th>spider</th><td>{{ spider }}</td></tr>
-          <tr><th>job</th><td>{{ job }}</td></tr>
-          <tr><th>first_log_time</th><td>{{ first_log_time }}</td></tr>
-          <tr><th>latest_log_time</th><td>{{ latest_log_time }}</td></tr>
-          <tr><th>runtime</th><td>{{ runtime }}</td></tr>
+          <tr><th>项目</th><td>{{ project }}</td></tr>
+          <tr><th>爬虫</th><td>{{ spider }}</td></tr>
+          <tr><th>任务</th><td>{{ job }}</td></tr>
+          <tr><th>日志创建时间</th><td>{{ first_log_time }}</td></tr>
+          <tr><th>日志结束时间</th><td>{{ latest_log_time }}</td></tr>
+          <tr><th>运行时间</th><td>{{ runtime }}</td></tr>
           <tr>
-            <th>crawled_pages</th>
+            <th>请求数</th>
             <td>
             {% if pages is none %}
               N/A
@@ -98,21 +98,21 @@ window.onload = function(){
             {% endif %}
             </td>
           </tr>
-          <tr><th>shutdown_reason</th><td id="shutdown_reason">{{ shutdown_reason }}</td></tr>
-          <tr><th>finish_reason</th><td id="finish_reason">{{ finish_reason }}</td></tr>
+          <tr><th>关闭原因</th><td id="shutdown_reason">{{ shutdown_reason }}</td></tr>
+          <tr><th>完成原因</th><td id="finish_reason">{{ finish_reason }}</td></tr>
 
-          <tr><th>log_critical_count</th><td id="log_critical_count">{{ log_categories['critical_logs']['count'] }}</td></tr>
-          <tr><th>log_error_count</th><td id="log_error_count">{{ log_categories['error_logs']['count'] }}</td></tr>
-          <tr><th>log_warning_count</th><td id="log_warning_count">{{ log_categories['warning_logs']['count'] }}</td></tr>
-          <tr><th>log_redirect_count</th><td id="log_redirect_count">{{ log_categories['redirect_logs']['count'] }}</td></tr>
-          <tr><th>log_retry_count</th><td id="log_retry_count">{{ log_categories['retry_logs']['count'] }}</td></tr>
-          <tr><th>log_ignore_count</th><td id="log_ignore_count">{{ log_categories['ignore_logs']['count'] }}</td></tr>
+          <tr><th>关键日志 统计</th><td id="log_critical_count">{{ log_categories['critical_logs']['count'] }}</td></tr>
+          <tr><th>错误日志 统计</th><td id="log_error_count">{{ log_categories['error_logs']['count'] }}</td></tr>
+          <tr><th>警告日志 统计</th><td id="log_warning_count">{{ log_categories['warning_logs']['count'] }}</td></tr>
+          <tr><th>重定向日志 统计</th><td id="log_redirect_count">{{ log_categories['redirect_logs']['count'] }}</td></tr>
+          <tr><th>重试日志 统计</th><td id="log_retry_count">{{ log_categories['retry_logs']['count'] }}</td></tr>
+          <tr><th>忽略日志 统计</th><td id="log_ignore_count">{{ log_categories['ignore_logs']['count'] }}</td></tr>
 
-          <tr><th>latest_crawl</th><td id="latest_crawl"></td></tr>
-          <tr><th>latest_scrape</th><td id="latest_scrape"></td></tr>
-          <tr><th>latest_log</th><td id="latest_log"></td></tr>
-          <tr><th>current_time</th><td id="current_time"></td></tr>
-          <tr><th>latest_item</th><td style="word-break: break-all;">{{ latest_matches['latest_item'] or 'N/A' }}</td></tr>
+          <tr><th>最新爬取时间</th><td id="latest_crawl"></td></tr>
+          <tr><th>最新通过时间</th><td id="latest_scrape"></td></tr>
+          <tr><th>最新日志修改时间</th><td id="latest_log"></td></tr>
+          <tr><th>当前时间</th><td id="current_time"></td></tr>
+          <tr><th>最新item</th><td style="word-break: break-all;">{{ latest_matches['latest_item'] or 'N/A' }}</td></tr>
         </table>
       </div>
     </li>
@@ -120,7 +120,7 @@ window.onload = function(){
     <li id="content_categories">
       <div class="wrap collapse-wrap">
         <ul class="collapse">
-          <h3 style="color: red;">WARNING+</h3>
+          <h3 style="color: red;">警告+</h3>
         {% for title in ['critical_logs', 'error_logs', 'warning_logs'] %}
           {% if not log_categories[title]['count'] %}
           {% else %}
@@ -129,9 +129,9 @@ window.onload = function(){
               <h4>
                 <div style="width: 200px; display: inline-block;">{{ title }}</div>
                 {% if log_categories[title]['details']|length < log_categories[title]['count'] %}
-                  last {{ log_categories[title]['details']|length }} of {{ log_categories[title]['count'] }}
+                  最后 {{ log_categories[title]['details']|length }} 关于 {{ log_categories[title]['count'] }}
                 {% else %}
-                  {{ log_categories[title]['count'] }} in total
+                  {{ log_categories[title]['count'] }} 总计
                 {% endif %}
               </h4>
               <i class="iconfont icon-right"></i>
@@ -158,9 +158,9 @@ window.onload = function(){
               <h4>
                 <div style="width: 200px; display: inline-block;">{{ title }}</div>
                 {% if log_categories[title]['details']|length < log_categories[title]['count'] %}
-                  last {{ log_categories[title]['details']|length }} of {{ log_categories[title]['count'] }}
+                  最后 {{ log_categories[title]['details']|length }} 关于 {{ log_categories[title]['count'] }}
                 {% else %}
-                  {{ log_categories[title]['count'] }} in total
+                  {{ log_categories[title]['count'] }} 总计
                 {% endif %}
               </h4>
               <i class="iconfont icon-right"></i>
@@ -208,14 +208,14 @@ window.onload = function(){
         <ul class="collapse">
           <li>
             <div class="title">
-              <h4>Head</h4>
+              <h4>日志开头</h4>
               <i class="iconfont icon-right"></i>
             </div>
             <pre>{{ head }}</pre>
           </li>
            <li>
             <div class="title">
-              <h4>Tail</h4>
+              <h4>日志结尾</h4>
               <i class="iconfont icon-right"></i>
             </div>
             <pre>{{ tail }}</pre>
@@ -223,7 +223,7 @@ window.onload = function(){
           {% if url_opt_opposite %}
           <li>
             <div class="title">
-              <h4>Log</h4>
+              <h4>日志</h4>
               <i class="iconfont icon-right"></i>
             </div>
             <p><a class="link" target="_blank" href="{{ url_opt_opposite }}">{{ url_opt_opposite }}</a></p>
@@ -232,7 +232,7 @@ window.onload = function(){
           {% if url_source %}
           <li>
             <div class="title">
-              <h4>Source</h4>
+              <h4>目录</h4>
               <i class="iconfont icon-right"></i>
             </div>
             <p><a class="link" target="_blank" href="{{ url_source }}">{{ url_source }}</a></p>
@@ -292,13 +292,13 @@ setInterval(function() {
   {% else %}
     {% if 'realtime=True' in url_jump %}
     var by = 'LogParser';
-    var click = 'click to request the latest cached version (FAST)';
+    var click = '点击获取最新的消息 (快)';
     {% else %}
     var by = 'ScrapydWeb';
-    var click = 'click to hard reparse (SLOW)';
+    var click = '点击进行重新解析 (慢)';
     {% endif %}
   {% endif %}
-  my$('#refresh_button').innerHTML = "Parsed by " + by + " <span style='color: black;'>" + seconds + "</span> secs ago, " + click;
+  my$('#refresh_button').innerHTML = "解析 " + by + " <span style='color: black;'>" + seconds + "</span> 秒前, " + click;
   // my$('#refresh_button').className = "button danger";
 }, 1000);
 {% endif %}
@@ -315,8 +315,8 @@ var chartsArr = [{
   dom: my$('#chart_total'),
   echart: echarts.init(my$('#chart_total')),
   data: datas,
-  title: 'count / total',
-  label1: 'pages',
+  title: '数量 / 总计l',
+  label1: '请求数',
   index1: 1,
   label2: 'items',
   index2: 3
@@ -324,10 +324,10 @@ var chartsArr = [{
   dom: my$('#chart_minute'),
   echart: echarts.init(my$('#chart_minute')),
   data: datas,
-  title: 'count / minute',
-  label1: 'pages / minute',
+  title: '数量 / 分钟',
+  label1: '请求数 / 分钟',
   index1: 2,
-  label2: 'items / minute',
+  label2: 'items / 分钟',
   index2: 4
 }]
 

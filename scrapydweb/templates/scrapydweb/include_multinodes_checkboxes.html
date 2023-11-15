@@ -1,7 +1,7 @@
   <div id="multinodes">
-    <a class="link" href="{{ url_servers }}" target="_blank">To select nodes in the Servers page &raquo;</a>
+    <a class="link" href="{{ url_servers }}" target="_blank">在服务集群页面中选择节点 &raquo;</a>
     <div class="line-container">
-      <div class="key"><span>*</span>multinodes</div>
+      <div class="key"><span>*</span>批量</div>
       <input type="text" name="checked_amount" value="1" hidden />
       <div class="multiselect">
         <div class="selectBox" onclick="showCheckboxes();">
@@ -14,9 +14,9 @@
           <div class="overSelect"></div>
         </div>
         <div id="checkboxes" style="display: none;">
-          <label for="checkCurrent"><input type="checkbox" id="checkCurrent" />Check current node only</label>
-          <label for="syncFromServersPage"><input type="checkbox" id="syncFromServersPage" />Sync from Servers page</label>
-          <label for="checkAll"><input type="checkbox" id="checkAll" />CheckAll / UncheckAll</label>
+          <label for="checkCurrent"><input type="checkbox" id="checkCurrent" />只检查当前节点</label>
+          <label for="syncFromServersPage"><input type="checkbox" id="syncFromServersPage" />同步服务器页面</label>
+          <label for="checkAll"><input type="checkbox" id="checkAll" />全选 / 全不选</label>
           <div id="nodes_checkboxes">
           {% for SCRAPYD_SERVER in SCRAPYD_SERVERS %}
             {% if SCRAPYD_SERVERS_GROUPS[loop.index0] and loop.changed(SCRAPYD_SERVERS_GROUPS[loop.index0]) %}
@@ -30,7 +30,7 @@
           {% endfor %}
           </div>
         </div>
-        <div class="form-item-error">Select at least one node</div>
+        <div class="form-item-error">至少选择一个节点</div>
       </div>
     </div>
   </div>

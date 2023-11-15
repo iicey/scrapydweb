@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}settings{% endblock %}
+{% block title %}设置{% endblock %}
 
 {% block head %}
   <style>
@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block body %}
-<h2><a class="link" target="_blank" href="{{ GITHUB_URL }}/blob/master/scrapydweb/default_settings.py">Settings</a></h2>
+<h2><a class="link" target="_blank" href="{{ GITHUB_URL }}/blob/master/scrapydweb/default_settings.py">设置</a></h2>
 
 <div class="wrap collapse-wrap">
   <ul class="collapse">
@@ -18,12 +18,12 @@
       <p>{{ DEFAULT_SETTINGS_PY_PATH }}</p>
     </li>
     <li>
-      <div class="title"><h4>user settings</h4><i class="iconfont icon-right"></i></div>
+      <div class="title"><h4>用户配置文件目录</h4><i class="iconfont icon-right"></i></div>
       <p>{{ SCRAPYDWEB_SETTINGS_PY_PATH }}</p>
     </li>
-    <li><div class="title"><h4>main_pid: {{ MAIN_PID }}</h4></div></li>
-    <li><div class="title"><h4>logparser_pid: {{ LOGPARSER_PID }}</h4></div></li>
-    <li><div class="title"><h4>poll_pid: {{ POLL_PID }}</h4></div></li>
+    <li><div class="title"><h4>主进程号: {{ MAIN_PID }}</h4></div></li>
+    <li><div class="title"><h4>logparser进程号: {{ LOGPARSER_PID }}</h4></div></li>
+    <li><div class="title"><h4>poll进程号: {{ POLL_PID }}</h4></div></li>
   </ul>
 </div>
 
@@ -35,7 +35,7 @@
       <h3>ScrapydWeb</h3>
       <ul class="collapse">
         <li>
-          <div class="title"><h4>* server *</h4><i class="iconfont icon-right"></i></div>
+          <div class="title"><h4>* 服务器 *</h4><i class="iconfont icon-right"></i></div>
           <pre>{{ scrapydweb_server }}</pre>
         </li>
         <li>
@@ -59,7 +59,7 @@
       <h3>Scrapyd</h3>
       <ul class="collapse">
         <li>
-          <div class="title"><h4>* servers *</h4><i class="iconfont icon-right"></i></div>
+          <div class="title"><h4>* 服务器 *</h4><i class="iconfont icon-right"></i></div>
           <pre>{{ servers }}</pre>
         </li>
         <li>
@@ -81,7 +81,7 @@
       <h3>LogParser</h3>
       <ul class="collapse">
         <li><div class="title"><h4>ENABLE_LOGPARSER = {{ ENABLE_LOGPARSER }}</h4></div></li>
-        <li><div class="title"><h4>version: {{ logparser_version }}</h4></div></li>
+        <li><div class="title"><h4>版本: {{ logparser_version }}</h4></div></li>
         <li>
           <div class="title"><h4>settings.py</h4><i class="iconfont icon-right"></i></div>
           <p>{{ logparser_settings_py_path }}</p>
@@ -91,7 +91,7 @@
     </div>
 
     <div class="wrap collapse-wrap">
-      <h3>Timer tasks</h3>
+      <h3>定时任务</h3>
       <ul class="collapse">
         <li><div class="title"><h4>scheduler.state: {{ scheduler_state }}</h4></div></li>
         <li><div class="title"><h4>JOBS_SNAPSHOT_INTERVAL = {{ JOBS_SNAPSHOT_INTERVAL }}</h4></div></li>
@@ -99,27 +99,27 @@
     </div>
 
     <div class="wrap collapse-wrap">
-      <h3>Run Spider</h3>
+      <h3>爬虫运行</h3>
       <ul class="collapse">
         <li>
-          <div class="title"><h4>details</h4><i class="iconfont icon-right"></i></div>
+          <div class="title"><h4>详情</h4><i class="iconfont icon-right"></i></div>
           <pre>{{ run_spider_details }}</pre>
         </li>
       </ul>
     </div>
 
     <div class="wrap collapse-wrap">
-      <h3>Page Display</h3>
+      <h3>页面显示</h3>
       <ul class="collapse">
         <li>
-          <div class="title"><h4>details</h4><i class="iconfont icon-right"></i></div>
+          <div class="title"><h4>详情</h4><i class="iconfont icon-right"></i></div>
           <pre>{{ page_display_details }}</pre>
         </li>
       </ul>
     </div>
 
     <div class="wrap collapse-wrap">
-      <h3>Send Text</h3>
+      <h3>发送消息</h3>
       <ul class="collapse">
         <li>
           <div class="title"><h4>Slack</h4><i class="iconfont icon-right"></i></div>
@@ -134,34 +134,34 @@
           <pre>{{ email_details }}</pre>
         </li>
         <li>
-          <div class="title"><h4>email sender & recipients</h4><i class="iconfont icon-right"></i></div>
+          <div class="title"><h4>email 发件人 & 收件人</h4><i class="iconfont icon-right"></i></div>
           <pre>{{ email_sender_recipients }}</pre>
         </li>
         <li>
-          <div class="title"><h4>email smtp settings</h4><i class="iconfont icon-right"></i></div>
+          <div class="title"><h4>email smtp 设置</h4><i class="iconfont icon-right"></i></div>
           <pre>{{ email_smtp_settings }}</pre>
         </li>
       </ul>
     </div>
 
     <div class="wrap collapse-wrap">
-      <h3>Monitor & Alert</h3>
+      <h3>监测预警</h3>
       <ul class="collapse">
         <li><div class="title"><h4>ENABLE_MONITOR = {{ ENABLE_MONITOR }}</h4></div></li>
         <li>
-          <div class="title"><h4>poll interval</h4><i class="iconfont icon-right"></i></div>
+          <div class="title"><h4>轮询间隔</h4><i class="iconfont icon-right"></i></div>
           <pre>{{ poll_interval }}</pre>
         </li>
         <li>
-          <div class="title"><h4>alert switcher</h4><i class="iconfont icon-right"></i></div>
+          <div class="title"><h4>警报切换器</h4><i class="iconfont icon-right"></i></div>
           <pre>{{ alert_switcher }}</pre>
         </li>
         <li>
-          <div class="title"><h4>alert working time</h4><i class="iconfont icon-right"></i></div>
+          <div class="title"><h4>警报工作时间</h4><i class="iconfont icon-right"></i></div>
           <pre>{{ alert_working_time }}</pre>
         </li>
         <li>
-          <div class="title"><h4>triggers</h4><i class="iconfont icon-right"></i></div>
+          <div class="title"><h4>触发器</h4><i class="iconfont icon-right"></i></div>
           <pre>{{ alert_triggers|safe }}</pre>
         </li>
       </ul>

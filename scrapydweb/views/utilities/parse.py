@@ -74,7 +74,7 @@ class UploadedLogView(BaseView):
                 self.text = f.read()
         except Exception as err:
             return render_template(self.template_fail, node=self.node,
-                                   alert="An error occurred when reading the uploaded logfile",
+                                   alert="读取上传的日志文件时出错",
                                    text='%s\n%s' % (err.__class__.__name__, err))
 
         self.get_job_info()

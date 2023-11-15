@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}deploy results{% endblock %}
+{% block title %}部署结果{% endblock %}
 
 {% block head %}
   <link rel="stylesheet" type="text/css" href="{{ static_css_multinode }}">
@@ -9,22 +9,22 @@
 
 
 {% block body %}
-<h2>Deploy Project</h2>
+<h2>项目部署</h2>
 <div class="table wrap">
   <table>
     <thead>
       <tr>
         <th>
           <input type="checkbox" id="checkAll" />
-          <a class="state warning" href="javascript:;" onclick="invertSelection();">invert selection</a>
+          <a class="state warning" href="javascript:;" onclick="invertSelection();">取消全选</a>
         </th>
-        <th>Index</th>
-        <th>Projects</th>
-        <th>Node Name</th>
-        <th>Status</th>
-        <th>Project</th>
-        <th>Version</th>
-        <th>Spiders</th>
+        <th>序号</th>
+        <th>项目</th>
+        <th>服务节点</th>
+        <th>状态</th>
+        <th>子项目</th>
+        <th>版本</th>
+        <th>爬虫</th>
       </tr>
     </thead>
   <form method="post" enctype="multipart/form-data">
@@ -73,8 +73,8 @@
   </table>
 
   <div class="action">
-    <a class="button safe big" href="javascript:;" onclick="multinodeRunSpider();">{% if selected_nodes|length > 1 %}Multinode {% endif %}Run Spider</a>
-    <a class="button normal big" href="javascript:;" onclick="passToServers();">Servers &raquo; Run Spider</a>
+    <a class="button safe big" href="javascript:;" onclick="multinodeRunSpider();">{% if selected_nodes|length > 1 %}批量 {% endif %}启动爬虫</a>
+    <a class="button normal big" href="javascript:;" onclick="passToServers();">服务 &raquo; 启动爬虫</a>
   </div>
 </div>
 
@@ -116,7 +116,7 @@ function fireXHR(){
 
 
 function execXHR(idx, url){
-  my$('#'+'status_'+idx).innerHTML = '<em class="normal">loading...</em>';
+  my$('#'+'status_'+idx).innerHTML = '<em class="normal">加载中...</em>';
   var req = new XMLHttpRequest();
   req.onreadystatechange = function() {
     if (this.readyState == 4) {

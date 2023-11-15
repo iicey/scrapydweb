@@ -34,7 +34,7 @@ class LogsView(BaseView):
                 url=self.url,
                 status_code=status_code,
                 text=self.text,
-                tip="Click the above link to make sure your Scrapyd server is accessable. "
+                tip="点击链接验证Scrapyd服务是可访问的"
             )
             return render_template(self.template_fail, **kwargs)
 

@@ -50,10 +50,10 @@ window.onload = function(){
 
 
 {% block neck %}
-<a class="button normal" href="javascript:;" onclick="forceLoader('{{ g.url_jobs_list[node-1] }}')">Jobs</a>
+<a class="button normal" href="javascript:;" onclick="forceLoader('{{ g.url_jobs_list[node-1] }}')">任务</a>
 <!-- <a class="button warning" href="javascript:;" onclick="forceLoader('{{ url_utf8_mobile }}')">Log</a> -->
 {% if url_refresh %}
-<a id="refresh_button" class="button warning" href="javascript:;" onclick="forceLoader('{{ url_refresh }}');">Parsed</a>
+<a id="refresh_button" class="button warning" href="javascript:;" onclick="forceLoader('{{ url_refresh }}');">解析</a>
 {% endif %}
 {% endblock %}
 
@@ -61,17 +61,17 @@ window.onload = function(){
 {% block body %}
 <div class="tab-wrap wrap">
   <ul class="tab tab-header clear-float">
-    <li id="header_analysis">Analysis</li>
-    <li id="header_categories">Categories</li>
+    <li id="header_analysis">日志分析</li>
+    <li id="header_categories">日志分类</li>
     {% if datas|length > 1 %}
-    <li id="header_charts">Charts</li>
+    <li id="header_charts">可视化进度</li>
     {% endif %}
-    <li id="header_logs">Logs</li>
+    <li id="header_logs">查看日志</li>
     {% if crawler_stats %}
-    <li id="header_stats">Crawler.stats</li>
+    <li id="header_stats">爬虫统计</li>
     {% endif %}
     {% if crawler_engine %}
-    <li id="header_engine">Crawler.engine</li>
+    <li id="header_engine">爬虫引擎</li>
     {% endif %}
   </ul>
 
@@ -79,14 +79,14 @@ window.onload = function(){
     <li id="content_analysis">
       <div class="table vertical-table">
         <table border="1">
-          <tr><th>project</th><td>{{ project }}</td></tr>
-          <tr><th>spider</th><td>{{ spider }}</td></tr>
-          <tr><th>job</th><td>{{ job }}</td></tr>
-          <tr><th>first_log_time</th><td>{{ first_log_time }}</td></tr>
-          <tr><th>latest_log_time</th><td>{{ latest_log_time }}</td></tr>
-          <tr><th>runtime</th><td>{{ runtime }}</td></tr>
+          <tr><th>项目</th><td>{{ project }}</td></tr>
+          <tr><th>爬虫</th><td>{{ spider }}</td></tr>
+          <tr><th>任务</th><td>{{ job }}</td></tr>
+          <tr><th>日志创建时间</th><td>{{ first_log_time }}</td></tr>
+          <tr><th>日志结束时间</th><td>{{ latest_log_time }}</td></tr>
+          <tr><th>运行时间</th><td>{{ runtime }}</td></tr>
           <tr>
-            <th>crawled_pages</th>
+            <th>请求数</th>
             <td>
             {% if pages is none %}
               N/A
@@ -105,21 +105,21 @@ window.onload = function(){
             {% endif %}
             </td>
           </tr>
-          <tr><th>shutdown_reason</th><td id="shutdown_reason">{{ shutdown_reason }}</td></tr>
-          <tr><th>finish_reason</th><td id="finish_reason">{{ finish_reason }}</td></tr>
+          <tr><th>关闭原因</th><td id="shutdown_reason">{{ shutdown_reason }}</td></tr>
+          <tr><th>完成原因</th><td id="finish_reason">{{ finish_reason }}</td></tr>
 
-          <tr><th>log_critical_count</th><td id="log_critical_count">{{ log_categories['critical_logs']['count'] }}</td></tr>
-          <tr><th>log_error_count</th><td id="log_error_count">{{ log_categories['error_logs']['count'] }}</td></tr>
-          <tr><th>log_warning_count</th><td id="log_warning_count">{{ log_categories['warning_logs']['count'] }}</td></tr>
-          <tr><th>log_redirect_count</th><td id="log_redirect_count">{{ log_categories['redirect_logs']['count'] }}</td></tr>
-          <tr><th>log_retry_count</th><td id="log_retry_count">{{ log_categories['retry_logs']['count'] }}</td></tr>
-          <tr><th>log_ignore_count</th><td id="log_ignore_count">{{ log_categories['ignore_logs']['count'] }}</td></tr>
+          <tr><th>关键日志 统计</th><td id="log_critical_count">{{ log_categories['critical_logs']['count'] }}</td></tr>
+          <tr><th>错误日志 统计</th><td id="log_error_count">{{ log_categories['error_logs']['count'] }}</td></tr>
+          <tr><th>警告日志 统计</th><td id="log_warning_count">{{ log_categories['warning_logs']['count'] }}</td></tr>
+          <tr><th>重定向日志 统计</th><td id="log_redirect_count">{{ log_categories['redirect_logs']['count'] }}</td></tr>
+          <tr><th>重试日志 统计</th><td id="log_retry_count">{{ log_categories['retry_logs']['count'] }}</td></tr>
+          <tr><th>忽略日志 统计</th><td id="log_ignore_count">{{ log_categories['ignore_logs']['count'] }}</td></tr>
 
-          <tr><th>latest_crawl</th><td id="latest_crawl"></td></tr>
-          <tr><th>latest_scrape</th><td id="latest_scrape"></td></tr>
-          <tr><th>latest_log</th><td id="latest_log"></td></tr>
-          <tr><th>current_time</th><td id="current_time"></td></tr>
-          <tr><th>latest_item</th><td style="word-break: break-all;">{{ latest_matches['latest_item'] or 'N/A' }}</td></tr>
+          <tr><th>最新爬取时间</th><td id="latest_crawl"></td></tr>
+          <tr><th>最新通过时间</th><td id="latest_scrape"></td></tr>
+          <tr><th>最新日志修改时间</th><td id="latest_log"></td></tr>
+          <tr><th>当前时间</th><td id="current_time"></td></tr>
+          <tr><th>最新item</th><td style="word-break: break-all;">{{ latest_matches['latest_item'] or 'N/A' }}</td></tr>
         </table>
       </div>
     </li>
@@ -127,7 +127,7 @@ window.onload = function(){
     <li id="content_categories">
       <div class="wrap collapse-wrap">
         <ul class="collapse">
-          <h3 style="color: red;">WARNING+</h3>
+          <h3 style="color: red;">警告+</h3>
         {% for title in ['critical_logs', 'error_logs', 'warning_logs'] %}
           {% if not log_categories[title]['count'] %}
           {% else %}
@@ -136,9 +136,9 @@ window.onload = function(){
               <h4>
                 <div style="width: 200px; display: inline-block;">{{ title }}</div>
                 {% if log_categories[title]['details']|length < log_categories[title]['count'] %}
-                  last {{ log_categories[title]['details']|length }} of {{ log_categories[title]['count'] }}
+                  最后 {{ log_categories[title]['details']|length }} 关于 {{ log_categories[title]['count'] }}
                 {% else %}
-                  {{ log_categories[title]['count'] }} in total
+                  {{ log_categories[title]['count'] }} 总计
                 {% endif %}
               </h4>
               <i class="iconfont icon-right"></i>
@@ -165,9 +165,9 @@ window.onload = function(){
               <h4>
                 <div style="width: 200px; display: inline-block;">{{ title }}</div>
                 {% if log_categories[title]['details']|length < log_categories[title]['count'] %}
-                  last {{ log_categories[title]['details']|length }} of {{ log_categories[title]['count'] }}
+                  最后 {{ log_categories[title]['details']|length }} 关于 {{ log_categories[title]['count'] }}
                 {% else %}
-                  {{ log_categories[title]['count'] }} in total
+                  {{ log_categories[title]['count'] }} 总计
                 {% endif %}
               </h4>
               <i class="iconfont icon-right"></i>
@@ -215,28 +215,28 @@ window.onload = function(){
         <ul class="collapse">
           <li>
             <div class="title">
-              <h4>Head</h4>
+              <h4>日志开头</h4>
               <i class="iconfont icon-right"></i>
             </div>
             <pre>{{ head }}</pre>
           </li>
           <li>
             <div class="title">
-              <h4>Tail</h4>
+              <h4>日志结尾</h4>
               <i class="iconfont icon-right"></i>
             </div>
             <pre>{{ tail }}</pre>
           </li>
           <li>
             <div class="title">
-              <h4>Log</h4>
+              <h4>日志</h4>
               <i class="iconfont icon-right"></i>
             </div>
             <p><a class="link" target="_blank" href="{{ url_opt_opposite }}">{{ url_opt_opposite }}</a></p>
           </li>
           <li>
             <div class="title">
-              <h4>Source</h4>
+              <h4>目录</h4>
               <i class="iconfont icon-right"></i>
             </div>
             <p><a class="link" target="_blank" href="{{ url_source }}">{{ url_source }}</a></p>
@@ -292,7 +292,7 @@ setColor();
 setInterval(function() {
   var now_timestamp = Date.now() / 1000;
   var seconds = Math.ceil(now_timestamp - LAST_UPDATE_TIMESTAMP);
-  my$('#refresh_button').innerHTML = "Parsed <span style='color: black;'>" + seconds + "</span> secs ago";
+  my$('#refresh_button').innerHTML = "解析 <span style='color: black;'>" + seconds + "</span> 秒前";
 }, 1000);
 {% endif %}
 </script>

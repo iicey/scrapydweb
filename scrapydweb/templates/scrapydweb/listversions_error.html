@@ -1,18 +1,18 @@
 <div style="border: 1px solid #f56c6c;">
-  <a class="request" target="_blank" href="{{ url }}">REQUEST</a><em class="fail"> got status: {{ status }}</em>
+  <a class="request" target="_blank" href="{{ url }}">请求</a><em class="fail"> 已获取状态: {{ status }}</em>
 
   <pre>{{ text }}</pre>
 
   <div{% if not tip %} style="display: none;"{% endif %}>
-    <h2>Tip</h2>
+    <h2>提示</h2>
     <div>{{ tip }}</div>
   </div>
 
   <div style="margin: 16px 0;">
-    You can <a class="button safe" href="{{ url_deploy }}">Deploy Project</a>with another project name or
+    你可以使用另一个项目名 <a class="button safe" href="{{ url_deploy }}">部署项目</a>或
     <a class="button danger" href="javascript:;"
     onclick="execXHR('{{ url_delproject }}', 'versions_of_{{ project }}', 'Delete project \'{{ project }}\'?');">
-    Delete Project
+    删除项目
     </a>
   </div>
 </div>

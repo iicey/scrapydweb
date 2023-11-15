@@ -102,7 +102,7 @@ class JobsView(BaseView):
                 url=self.url,
                 status_code=status_code,
                 text=self.text,
-                tip="Click the above link to make sure your Scrapyd server is accessable. "
+                tip="点击链接验证Scrapyd服务是可访问的"
             )
             return render_template(self.template_fail, **kwargs)
         # Temp support for Scrapyd v1.3.0 (not released)
@@ -139,15 +139,14 @@ class JobsView(BaseView):
         if self.metadata['pageview'] > 2 and self.metadata['pageview'] % 100:
             return
         if not self.ENABLE_AUTH and self.SCRAPYD_SERVERS_AMOUNT == 1:
-            flash("Set 'ENABLE_AUTH = True' to enable basic auth for web UI", self.INFO)
+            flash("设置“ENABLE_AUTH=True”以启用web UI的基本身份验证", self.INFO)
         if self.IS_LOCAL_SCRAPYD_SERVER:
             if not self.LOCAL_SCRAPYD_LOGS_DIR:
-                flash(("Set up the LOCAL_SCRAPYD_LOGS_DIR option to speed up the loading of scrapy logfiles "
-                      "for the LOCAL_SCRAPYD_SERVER %s" % self.SCRAPYD_SERVER), self.WARN)
+                flash(("对于 LOCAL_SCRAPYD_SERVER %s 设置 LOCAL_SCRAPYD_LOGS_DIR 选项可以更快加载 scrapy 日志文件" % self.SCRAPYD_SERVER), self.WARN)
             if not self.ENABLE_LOGPARSER:
-                flash("Set 'ENABLE_LOGPARSER = True' to run LogParser as a subprocess at startup", self.WARN)
+                flash("设置“ENABLE_LOGPARSER=True”以在启动时将LOGPARSER作为子进程运行", self.WARN)
         if not self.ENABLE_MONITOR and self.SCRAPYD_SERVERS_AMOUNT == 1:
-            flash("Set 'ENABLE_MONITOR = True' to enable the monitor feature", self.INFO)
+            flash("设置“ENABLE_MONITOR=True”以启用监视器功能", self.INFO)
 
 # stats.json by LogParser
 # {

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}log{% endblock %}
+{% block title %}日志{% endblock %}
 
 {% block head %}
   <style>
@@ -25,21 +25,21 @@
   <div class="stick"></div>
 </div>
 
-<h3>PROJECT ({{ project }}), SPIDER ({{ spider }})</h3>
+<h3>项目 ({{ project }}), 爬虫 ({{ spider }})</h3>
 
 <div class="wrap collapse-wrap">
   <!-- <h3>INFO</h3> -->
   <ul class="collapse">
     <li>
       <div class="title">
-        <h4>Stats</h4>
+        <h4>统计</h4>
         <i class="iconfont icon-right"></i>
       </div>
       <p><a class="link" href="{{ url_opt_opposite }}" target="_blank">{{ url_opt_opposite }}</a></p>
     </li>
     <li>
       <div class="title">
-        <h4>Source</h4>
+        <h4>源地址</h4>
         <i class="iconfont icon-right"></i>
       </div>
       <p><a class="link" href="{{ url_source }}" target="_blank">{{ url_source }}</a></p>
@@ -51,9 +51,9 @@
 <div id="log">
   <pre>{{ text }}</pre>
 </div>
-<h3>PROJECT ({{ project }}), SPIDER ({{ spider }})</h3>
+<h3>项目 ({{ project }}), 爬虫 ({{ spider }})</h3>
 {% if url_refresh %}
-<a id="refresh_button" class="button danger" href="{{ url_refresh }}" onclick="showLoader();">Click to refresh</a>
+<a id="refresh_button" class="button danger" href="{{ url_refresh }}" onclick="showLoader();">点击刷新</a>
 {% endif %}
 
 
@@ -85,7 +85,7 @@ const LAST_UPDATE_TIMESTAMP = {{ last_update_timestamp }};
 setInterval(function() {
   var now_timestamp = Date.now() / 1000;
   var seconds = Math.ceil(now_timestamp - LAST_UPDATE_TIMESTAMP);
-  my$('#refresh_button').innerHTML = "Loaded <span style='color: black;'>" + seconds + "</span> secs ago, click to hard reload (SLOW)";
+  my$('#refresh_button').innerHTML = "加载 <span style='color: black;'>" + seconds + "</span> 秒后, 点击重新加载 (慢)";
 }, 1000);
 {% endif %}
 </script>

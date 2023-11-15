@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}deploy project{% endblock %}
+{% block title %}部署项目{% endblock %}
 
 {% block head %}
   <style>
@@ -76,7 +76,7 @@
 
 {% block body %}
 <h2>
-  <a class="link" target="_blank" href="{{ url }}">Add a version to a project, creating the project if it doesn't exist.</a>
+  <a class="link" target="_blank" href="{{ url }}">将版本添加到项目中，如果项目不存在，则创建该项目</a>
   <label title="manage existing projects and versions">
     <a class="button safe narrow" href="{{ url_projects }}">+</a>
   </label>
@@ -87,36 +87,36 @@
   <ul class="collapse">
     <li>
       <div class="title">
-        <h4>HELP</h4>
+        <h4>帮助</h4>
         <i class="iconfont icon-right"></i>
       </div>
 
-      <p>Deploying your project involves packaging it and uploading the egg file to Scrapyd.
-        (See <a class="link" target="_blank" href="https://scrapyd.readthedocs.org/en/latest/api.html#addversion-json">Scrapyd addversion.json</a>)
-        You can do this manually, but the easiest way is to use the scrapyd-deploy tool.
-        (See <a class="link" target="_blank" href="https://github.com/scrapy/scrapyd-client">scrapyd-client</a>)
+      <p>部署您的项目需要将其打包并将egg文件上传到Scrapyd服务器
+        (详情请看 <a class="link" target="_blank" href="https://scrapyd.readthedocs.org/en/latest/api.html#addversion-json">Scrapyd的addversion.json</a>)
+        您需要手动执行此工作, 最简单的方式是使用 scrapyd-deploy 工具。
+        (详情请看 <a class="link" target="_blank" href="https://github.com/scrapy/scrapyd-client">scrapyd-client</a>)
       </p>
       <br>
-      <p>Note: Scrapyd uses the distutils LooseVersion to interpret the version numbers you provide.
-        (See <a class="link" target="_blank" href="http://epydoc.sourceforge.net/stdlib/distutils.version.LooseVersion-class.html">_ClassType LooseVersion</a>)
-        And setting the version arbitrarily may cause the scrapyd API 'listversions' to raise error like "builtins.TypeError: '&lt;' not supported between instances of 'str' and 'int'".
+      <p>说明: Scrapyd 使用 distutils LooseVersion 来获取您的版本号。
+        (详情请看 <a class="link" target="_blank" href="http://epydoc.sourceforge.net/stdlib/distutils.version.LooseVersion-class.html">_ClassType LooseVersion</a>)
+        随意设置版本号可能会导致 scrapyd API 的 'listversions' 产生像 "builtins.TypeError: '&lt;' not supported between instances of 'str' and 'int'" 的错误。
       </p>
       <br>
       <div style="margin-left: 8px;">
-        <p><strong>Auto packaging (projects stored in the ScrapydWeb host)</strong></p>
-        <p>Step 1: set up the SCRAPY_PROJECTS_DIR option for locating projects before starting up ScrapydWeb</p>
-        <p>Step 2: select any project found in SCRAPY_PROJECTS_DIR to deploy via this page</p>
+        <p><strong>自动打包 (将项目存储在 ScrapydWeb 主机中)</strong></p>
+        <p>步骤 1: 设置 SCRAPY_PROJECTS_DIR 选项,可以在ScrapydWeb项目启动之前查找项目</p>
+        <p>步骤 2: 选择在 SCRAPY_PROJECTS_DIR 中查找到的项目在此页面中进行部署</p>
         <br>
-        <p><strong>Upload an egg file (from any host)</strong></p>
-        <p>Step 0: execute the "pip install scrapyd-client" command</p>
-        <p>Step 1: cd into your project's root, then execute the "scrapyd-deploy --build-egg projectname.egg" command</p>
-        <p>Step 2: upload the built egg file via this page</p>
+        <p><strong>上传 egg 文件 (从任何主机 推荐)</strong></p>
+        <p>步骤 0: 在其他主机执行 "pip install scrapyd-client" 命令</p>
+        <p>步骤 1: 进入scrapy项目目录, 在cmd中执行 "scrapyd-deploy -p 爬虫名 --build-egg 爬虫名.egg" 命令</p>
+        <p>步骤 2: 通过此页面上传生成的egg文件</p>
         <br>
-        <p><strong>Upload a compressed file (from any host)</strong></p>
-        <p>Step 1: compress your project folder into an archive file (.zip) with an archiving software or via the tar command:
+        <p><strong>传压缩文件 (从任何主机)</strong></p>
+        <p>步骤 1: 使用压缩工具或tar命令将项目文件夹压缩为压缩文件（.zip）：
           <pre id="tar">$ tar -czvf projectname.tar.gz /path/to/your/projectname</pre>
         </p>
-        <p>Step 2: upload the compressed file via this page</p>
+        <p>步骤 2: 通过此页面上传压缩文件</p>
       </div>
     </li>
 
@@ -136,17 +136,17 @@
 
 <div class="tab-wrap wrap">
   <ul class="tab tab-header clear-float">
-    <li id="header_package">Auto packaging</li>
-    <li id="header_upload">Upload file</li>
+    <li id="header_package">自动打包</li>
+    <li id="header_upload">上传文件</li>
   </ul>
   <ul class="tab tab-content">
     <li id="content_package">
       <!-- <p style="margin-left: 130px;" href="{{ url_servers }}">{{ projects|length|string }} projects found</p> -->
       {% if folders|length == 0 %}
-      <h3>No projects found in '{{ SCRAPY_PROJECTS_DIR }}' of the ScrapydWeb host, check and update the SCRAPY_PROJECTS_DIR option in the config file.</h3>
+      <h3>在ScrapydWeb的主机目录 '{{ SCRAPY_PROJECTS_DIR }}' 中没有找到项目, 请查看或更新您的 SCRAPY_PROJECTS_DIR 目录。</h3>
       {% endif %}
       <div class="line-container">
-        <div class="key">folder</div>
+        <div class="key">文件夹</div>
         <div class="value" style="position: relative; padding: 0; cursor: {% if folders|length == 0 %}not-allowed{% else %}pointer{% endif %};">
           <input type="text" id="folder_selected" value="{{ latest_folder }}" hidden />
           <div onclick="handleDropdownProjects();" style="padding: 0 15px; height: 40px;">
@@ -163,49 +163,49 @@
             </div>
           </div>
         </div>
-        <div class="key" style="padding-left: 12px; width: unset;">({{ projects|length|string }} project{% if projects|length != 1 %}s{% endif %})</div>
+        <div class="key" style="padding-left: 12px; width: unset;">({{ projects|length|string }} 项目{% if projects|length != 1 %}s{% endif %})</div>
       </div>
 
       <div class="line-container">
-        <div class="key"><span>*</span>project</div>
+        <div class="key"><span>*</span>项目名</div>
         <div>
-          <input type="text" id="project_name" class="value readonly" readonly="readonly" placeholder="the project name" />
-          <div class="form-item-error">the project name is required</div>
+          <input type="text" id="project_name" class="value readonly" readonly="readonly" placeholder="项目名" />
+          <div class="form-item-error">必须填写项目名</div>
         </div>
       </div>
 
       <div class="line-container">
-        <div class="key">version</div>
+        <div class="key">项目版本</div>
         <div>
-          <input type="text" id="modification_time" class="value readonly" readonly="readonly" placeholder="the project version" />
-          <div class="form-item-error">the project version is required</div>
+          <input type="text" id="modification_time" class="value readonly" readonly="readonly" placeholder="项目版本" />
+          <div class="form-item-error">必须填写版本</div>
         </div>
       </div>
     </li>
 
     <li id="content_upload">
       <div class="line-container">
-        <div class="key">file</div>
+        <div class="key">文件</div>
         <div>
           <input type="text" id="filename" class="value readonly" readonly="readonly" placeholder="support file type: egg, zip, and tar.gz" />
-          <div class="form-item-error">select a file to upload</div>
+          <div class="form-item-error">选择要上传的文件</div>
         </div>
         <div id="filesize" class="key" style="padding-left: 12px; width: unset;"></div>
       </div>
 
       <div class="line-container">
-        <div class="key"><span>*</span>project</div>
+        <div class="key"><span>*</span>项目名</div>
         <div>
-          <input type="text" id="project" class="value readonly" readonly="readonly" placeholder="the project name" />
-          <div class="form-item-error">the project name is required</div>
+          <input type="text" id="project" class="value readonly" readonly="readonly" placeholder="项目名" />
+          <div class="form-item-error">必须填写项目名</div>
         </div>
       </div>
 
       <div class="line-container">
-        <div class="key">version</div>
+        <div class="key">项目版本</div>
         <div>
-          <input type="text" id="version" class="value readonly" readonly="readonly" placeholder="the project version" />
-          <div class="form-item-error">the project version is required</div>
+          <input type="text" id="version" class="value readonly" readonly="readonly" placeholder="项目版本" />
+          <div class="form-item-error">必须填写版本</div>
         </div>
       </div>
     </li>
@@ -221,9 +221,9 @@
     <label id="select-file-button" class="button warning big">
       <!-- macOS cannot select '.tar.gz' file if '.tar.gz' is added in accept -->
       <input type="file" id="file" name="file" accept=".egg, .zip, .gz" />
-      Select File
+      选择文件
     </label>
-    <a id="submit" class="button safe big" href="javascript:;" onclick="package();">Package & Deploy</a>
+    <a id="submit" class="button safe big" href="javascript:;" onclick="package();">打包并部署</a>
   </div>
 </div>
 
@@ -304,7 +304,7 @@ var div_folder_arr = my$$('.folders-content div');
 function handleDropdownProjects(folder_selected) {
   console.log('handleDropdownProjects');
   {% if folders|length == 0 %}
-  alert("No projects found in '{{ SCRAPY_PROJECTS_DIR }}' of the ScrapydWeb host, check and update the SCRAPY_PROJECTS_DIR option in the config file.");
+  alert("在ScrapydWeb的主机目录 '{{ SCRAPY_PROJECTS_DIR }}' 中没有找到项目, 请查看或更新您的 SCRAPY_PROJECTS_DIR 目录");
   return;
   {% endif %}
 
@@ -374,7 +374,7 @@ function package() {
   var version = my$('#modification_time').value;  //readonly
 
   {% if folders|length == 0 %}
-  alert("No projects found in '{{ SCRAPY_PROJECTS_DIR }}' of the ScrapydWeb host, check and update the SCRAPY_PROJECTS_DIR option in the config file.");
+  alert("在ScrapydWeb的主机目录 '{{ SCRAPY_PROJECTS_DIR }}' 中没有找到项目, 请查看或更新您的 SCRAPY_PROJECTS_DIR 目录");
   return;
   {% endif %}
 
@@ -549,11 +549,11 @@ function switchButtons(active_tab) {
   if (active_tab == 'package') {
     my$('#select-file-button').style.display = 'none';
     my$('#submit').onclick = package;
-    my$('#submit').text = "Package & Deploy";
+    my$('#submit').text = "打包并部署";
   } else {
     my$('#select-file-button').style.display = 'block';
     my$('#submit').onclick = upload;
-    my$('#submit').text = "Upload & Deploy";
+    my$('#submit').text = "上传并部署";
   }
 }
 

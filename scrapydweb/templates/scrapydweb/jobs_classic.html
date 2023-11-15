@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}jobs classic{% endblock %}
+{% block title %}任务管理{% endblock %}
 
 {% block head %}
   <!-- <meta http-equiv="refresh" content="60"> -->
@@ -29,9 +29,9 @@
 {% endif %}
 
 <h2>
-  <a class="link" target="_blank" href="{{ url }}">Get the list of jobs of all projects after Scrapyd server started.</a>
+  <a class="link" target="_blank" href="{{ url }}">获取scrapyd服务启动后的所有项目列表</a>
   <label title="switch to database view">
-    <a class="button normal" href="{{ url_jobs_database }}">Database</a>
+    <a class="button normal" href="{{ url_jobs_database }}">任务管理</a>
   </label>
   <label title="schedule a spider run">
     <a class="button safe narrow" href="{{ url_schedule }}">+</a>
@@ -39,14 +39,14 @@
 </h2>
 
 <div class="table wrap">
-  <h3>Pending ({{ pending_jobs|length }})</h3>
+  <h3>等待 ({{ pending_jobs|length }})</h3>
   <table>
     <thead>
       <tr>
-        <th>Project</th>
-        <th>Spider</th>
-        <th>Job</th>
-        <th>Action</th>
+        <th>项目</th>
+        <th>爬虫</th>
+        <th>任务</th>
+        <th>操作</th>
       </tr>
     </thead>
     <tbody id="tbody_pending">
@@ -70,29 +70,29 @@
 </div>
 
 <div class="table wrap">
-  <h3>Running ({{ running_jobs|length }}) <strong id="logparser_last_update" style="color: #67c23a;"></strong></h3>
+  <h3>运行中 ({{ running_jobs|length }}) <strong id="logparser_last_update" style="color: #67c23a;"></strong></h3>
   <table>
     <thead>
       <tr>
-        <th>Project</th>
-        <th>Spider</th>
+        <th>项目</th>
+        <th>爬虫</th>
         {% if SHOW_JOBS_JOB_COLUMN %}
-        <th>Job</th>
+        <th>任务</th>
         {% endif %}
 
-        <th>PID</th>
-        <th>Start</th>
-        <th>Runtime</th>
-        <th>Pages</th>
+        <th>进程号</th>
+        <th>状态</th>
+        <th>运行时间</th>
+        <th>请求数</th>
         <th>Items</th>
-        <th>Stats</th>
-        <th>Log</th>
+        <th>统计</th>
+        <th>日志</th>
         {% if SHOW_SCRAPYD_ITEMS and running_jobs and (running_jobs[0]['url_items'] or running_jobs[-1]['url_items']) %}
         <th>Items</th>
         {% endif %}
 
-        <th>Action</th>
-        <th>Forcestop</th>
+        <th>操作</th>
+        <th>强制停止</th>
       </tr>
     </thead>
     <tbody>
@@ -115,9 +115,9 @@
             {{ g.multinode|safe }}
           </a>
           {% endif %}
-          <a class="state normal" target="_blank" href="{{ job['url_stats'] }}">Stats</a>
+          <a class="state normal" target="_blank" href="{{ job['url_stats'] }}">统计</a>
         </td>
-        <td><a class="state normal" target="_blank" href="{{ job['url_utf8'] }}">Log</a></td>
+        <td><a class="state normal" target="_blank" href="{{ job['url_utf8'] }}">日志</a></td>
         {% if SHOW_SCRAPYD_ITEMS and job['url_items'] %}
         <td><a class="state normal" target="_blank" href="{{ job['url_items'] }}">Items</a></td>
         {% endif %}
@@ -140,28 +140,28 @@
 
 
 <div class="table wrap">
-  <h3>Finished ({{ finished_jobs|length }}) <strong style="color: red;">DESC</strong></h3>
+  <h3>完成 ({{ finished_jobs|length }}) <strong style="color: red;">DESC</strong></h3>
   <table>
     <thead>
       <tr>
-        <th>Project</th>
-        <th>Spider</th>
+        <th>项目</th>
+        <th>爬虫</th>
         {% if SHOW_JOBS_JOB_COLUMN %}
-        <th>Job</th>
+        <th>任务</th>
         {% endif %}
 
-        <th>Start</th>
-        <th>Runtime</th>
-        <th>Finish</th>
-        <th>Pages</th>
+        <th>状态</th>
+        <th>执行时间</th>
+        <th>完成时间</th>
+        <th>请求数</th>
         <th>Items</th>
-        <th>Stats</th>
-        <th>Log</th>
+        <th>统计</th>
+        <th>日志</th>
         {% if SHOW_SCRAPYD_ITEMS and finished_jobs and (finished_jobs[0]['url_items'] or finished_jobs[-1]['url_items']) %}
         <th>Items</th>
         {% endif %}
 
-        <th>Action</th>
+        <th>操作</th>
       </tr>
     </thead>
     <tbody>
@@ -184,9 +184,9 @@
             {{ g.multinode|safe }}
           </a>
           {% endif %}
-          <a class="state normal" target="_blank" href="{{ job['url_stats'] }}">Stats</a>
+          <a class="state normal" target="_blank" href="{{ job['url_stats'] }}">统计</a>
         </td>
-        <td><a class="state normal" target="_blank" href="{{ job['url_utf8'] }}">Log</a></td>
+        <td><a class="state normal" target="_blank" href="{{ job['url_utf8'] }}">日志</a></td>
         {% if SHOW_SCRAPYD_ITEMS and job['url_items'] %}
         <td><a class="state normal" target="_blank" href="{{ job['url_items'] }}">Items</a></td>
         {% endif %}
@@ -196,7 +196,7 @@
             {{ g.multinode|safe }}
           </a>
           {% endif %}
-          <a class="state safe" href="{{ job['url_schedule'] }}">Start</a>
+          <a class="state safe" href="{{ job['url_schedule'] }}">开始</a>
         </td>
       </tr>
     {% endfor %}
@@ -262,12 +262,12 @@ window.onload = function() {
           }
 
           my$('#logparser_stats').style.display = 'block';  // flash in base.html
-          my$('#logparser_stats').innerText = "LogParser v" + obj.logparser_version + ", last updated at " + obj.last_update_time + ", {{ url_liststats_source }}";
-          my$('#logparser_last_update').innerText = "by LogParser: " + Math.ceil(Date.now() / 1000 - obj.last_update_timestamp) + " secs ago";
+          my$('#logparser_stats').innerText = "日志分析 v" + obj.logparser_version + ", 最近更新 " + obj.last_update_time + ", {{ url_liststats_source }}";
+          my$('#logparser_last_update').innerText = "通过 日志分析: " + Math.ceil(Date.now() / 1000 - obj.last_update_timestamp) + " 秒前";
           setInterval(function() {
             var now_timestamp = Date.now() / 1000;
             var seconds = Math.ceil(Date.now() / 1000 - obj.last_update_timestamp);
-            my$('#logparser_last_update').innerHTML = "by LogParser: " + "<span style='color: red;'>" + seconds + "</span> secs ago";
+            my$('#logparser_last_update').innerHTML = "通过 日志分析: " + "<span style='color: red;'>" + seconds + "</span> 秒前";
           }, 1000);
 
           // Update Jobs database

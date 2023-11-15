@@ -29,11 +29,11 @@ class ServersView(BaseView):
 
         if self.SCRAPYD_SERVERS_AMOUNT > 1 and not (self.metadata['pageview'] > 2 and self.metadata['pageview'] % 100):
             if not self.ENABLE_AUTH:
-                flash("Set 'ENABLE_AUTH = True' to enable basic auth for web UI", self.INFO)
+                flash("设置“ENABLE_AUTH=True”以启用web UI的基本身份验证", self.INFO)
             if self.IS_LOCAL_SCRAPYD_SERVER and not self.ENABLE_LOGPARSER:
-                flash("Set 'ENABLE_LOGPARSER = True' to run LogParser as a subprocess at startup", self.WARN)
+                flash("设置“ENABLE_LOGPARSER=True”以在启动时将LOGPARSER作为子进程运行", self.WARN)
             if not self.ENABLE_MONITOR:
-                flash("Set 'ENABLE_MONITOR = True' to enable the monitor feature", self.INFO)
+                flash("设置“ENABLE_MONITOR=True”以启用监视器功能", self.INFO)
 
         if self.POST:
             self.selected_nodes = self.get_selected_nodes()

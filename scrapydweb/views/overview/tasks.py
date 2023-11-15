@@ -59,7 +59,7 @@ class TasksView(BaseView):
         # Use get_or_404 to ensure that url_for the Stats page works
         # task = Task.query.get_or_404(self.task_id)
         if self.task_id and not self.task:
-            message = "Task #%s not found" % self.task_id
+            message = "找不到 #%s 任务" % self.task_id
             self.logger.error(message)
             return render_template(self.template_fail, node=self.node, message=message)
 
