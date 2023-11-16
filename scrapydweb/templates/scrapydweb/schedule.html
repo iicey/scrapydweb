@@ -338,20 +338,20 @@ print(get_localzone())</pre>
         </el-form-item>
         <el-form-item label="随机延时" v-show="form.expandTimerTaskMoreSettings">
           <el-col :span="9">
-            <el-input v-model="form.jitter" placeholder="随机延迟 [-N, +N] 秒执行任务； 默认为 0" clearable></el-input>
+            <el-input v-model="form.jitter" placeholder="随机延时 [-N, +N] 秒执行任务； 默认为 0" clearable></el-input>
           </el-col>
           <el-tooltip class="put-off" placement="right">
-            <div slot="content">随机延迟 [-N, +N] 秒执行任务；<br/>默认为 0;<br/>在 apscheduler.readthedocs.io/en/latest/modules/triggers/cron.html 中搜索 'jitter'</div>
+            <div slot="content">随机延时 [-N, +N] 秒执行任务；<br/>默认为 0;<br/>在 apscheduler.readthedocs.io/en/latest/modules/triggers/cron.html 中搜索 'jitter'</div>
             <i class="el-icon-question"></i>
           </el-tooltip>
         </el-form-item>
 
         <el-form-item label="延迟容忍度" v-show="form.expandTimerTaskMoreSettings">
           <el-col :span="9">
-            <el-input v-model="form.misfire_grace_time" placeholder="失败任务的最大延迟容忍度；默认为 600 秒" clearable></el-input>
+            <el-input v-model="form.misfire_grace_time" placeholder="任务触发错过后的宽限时间；默认为 600 秒" clearable></el-input>
           </el-col>
           <el-tooltip class="put-off" placement="right">
-            <div slot="content">失败任务的最大延迟容忍度；<br/>默认为 600 秒；<br/>详情 apscheduler.readthedocs.io/en/latest/userguide.html#missed-job-executions-and-coalescing</div>
+            <div slot="content">任务触发错过后的宽限时间；<br/>默认为 600 秒；<br/>详情 apscheduler.readthedocs.io/en/latest/userguide.html#missed-job-executions-and-coalescing</div>
             <i class="el-icon-question"></i>
           </el-tooltip>
         </el-form-item>
